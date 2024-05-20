@@ -17,8 +17,8 @@ class Api:
 
     def ieyasu_attendance(self):
         try:
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'btnIN1')))
-            attendance_button = driver.find_element(By.ID, 'btnIN1')
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="btnIN1"]')))
+            attendance_button = driver.find_element(By.XPATH, '//*[@id="btnIN1"]')
             print(attendance_button.text)
         except Exception as e:
             print("Ieyasu_Attendance_Error")
