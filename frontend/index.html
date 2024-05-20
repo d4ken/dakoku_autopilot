@@ -12,13 +12,19 @@
 <body>
 <h1>勤怠打刻オペレーター</h1>
 <main>
+    前回の打刻日時:
+    <h3 id="last_timestamp"></h3>
+    <div>
+        <label for="url">ログインURL: </label>
+        <input type="text" id="url" name="url" size="25" value="https://f.ieyasu.co/techqiao/login/"/>
+    </div>
     <div>
         <label for="username">ログインID: </label>
-        <input type="text" id="username" name="username"/>
+        <input type="text" id="username" size="25" name="username"/>
     </div>
     <div>
         <label for="password">パスワード: </label>
-        <input type="password" id="password" name="password" required/>
+        <input type="password" id="password" size="25" name="password" required/>
     </div>
     <br>
     <button onclick="onClickAttendance()">出勤</button>
@@ -26,7 +32,3 @@
 </main>
 </body>
 </html>
-
-
-
-
