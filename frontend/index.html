@@ -10,10 +10,8 @@
     <script src="js/onLoad.js"></script>
 </head>
 <body>
-<h1>勤怠打刻オペレーター</h1>
 <main>
-    前回の打刻日時:
-    <h3 id="last_timestamp"></h3>
+    <h3 id="last_timestamp">最終打刻日時: </h3>
     <div>
         <label for="url">ログインURL: </label>
         <input type="text" id="url" name="url" size="25" value="https://f.ieyasu.co/techqiao/login/"/>
@@ -26,9 +24,9 @@
         <label for="password">パスワード: </label>
         <input type="password" id="password" size="25" name="password" required/>
     </div>
-    <br>
-    <button onclick="onClickAttendance()">出勤</button>
-    <button onclick="onClickLeaving()">退勤</button>
+    <h2 id="dakokuResult"></h2>
+    <button id="attendance-button" onclick="onClickAttendance(this)">出勤</button>
+    <button id="leaving-button" onclick="onClickLeaving(this)">退勤</button>
 </main>
 </body>
 </html>
