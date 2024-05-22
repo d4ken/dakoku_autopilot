@@ -22,7 +22,7 @@ const onClickDakoku = async () => {
         localStorage.setItem('login_url', data["url"]);
         // 打刻状態判定
         let dakokuStatsBefore = dakokuStatus.none;
-        dakokuStatsBefore = await pywebview.api.check_dakoku_before();
+        dakokuStatsBefore = await pywebview.api.check_dakoku();
         // 退勤済みなら出勤処理
         if (dakokuStatsBefore === dakokuStatus.leave) {
             let res = await pywebview.api.ieyasu_attendance();
@@ -45,7 +45,7 @@ const onClickDakoku = async () => {
 
 const attendanceDakoku = async (data) => {
     // 打刻状態判定
-    let dakokuStats = await pywebview.api.check_dakoku_after();
+    let dakokuStats = await pywebview.api.check_dakoku(true);
     if (dakokuStats === dakokuStatus.attend) {
         saveStorageUserInfo(data);
         document.getElementById("last_timestamp").textContent = `最終打刻日時: ${localStorage.getItem('last_timestamp')}`
@@ -58,7 +58,7 @@ const attendanceDakoku = async (data) => {
 const leavingDakoku = async (data) => {
     // 打刻状態判定
     let dakokuStats = dakokuStatus.none;
-    dakokuStats = await pywebview.api.check_dakoku_after();
+    dakokuStats = await pywebview.api.check_dakoku(true);
     if (dakokuStats === dakokuStatus.none) {
         saveStorageUserInfo(data);
         document.getElementById("last_timestamp").textContent = `最終打刻日時: ${localStorage.getItem('last_timestamp')}`

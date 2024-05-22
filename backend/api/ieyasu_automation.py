@@ -14,8 +14,8 @@ class Api:
     def __init__(self):
         self.window = None
 
-    # ログイン後の打刻成功判定
-    def check_dakoku_before(self):
+    # 打刻状態判定
+    def check_dakoku(self, is_quit=False):
         res = 'none'
         try:
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, Const.ATTENDANCE_BUTTON_XPATH)))
@@ -35,32 +35,11 @@ class Api:
             print("Ieyasu_Dakoku_Check_Error")
 
         finally:
-            print(res)
+            if is_quit:
+                driver.quit()
             return res
 
-    # ログイン後の打刻成功判定
-    def check_dakoku_after(self):
-        res = 'none'
-        try:
-            attendance_button = driver.find_element(By.XPATH, Const.ATTENDANCE_BUTTON_XPATH)
-            leaving_button = driver.find_element(By.XPATH, Const.LEAVING_BUTTON_XPATH)
-            attendance_button_state = attendance_button.get_attribute('onclick')
-            leaving_button_state = leaving_button.get_attribute('onclick')
-            if attendance_button_state != '':  # 出勤ボタンが押せる状態
-                print(attendance_button_state)
-                res = 'leave'
-            elif leaving_button_state != '':  # 退勤ボタンが押せる状態
-                print(leaving_button_state)
-                res = 'attend'
-            else:
-                res = 'none'
-        except Exception as e:
-            print("Ieyasu_Dakoku_Check_After_Error")
-
-        finally:
-            driver.quit()
-            return res
-
+    # 打刻自動化処理
     def ieyasu_attendance(self):
         last_timestamp = ''
         try:
@@ -76,9 +55,6 @@ class Api:
         except Exception as e:
             print("Ieyasu_Attendance_Error")
 
-        # finally:
-        #     driver.quit()
-
     def ieyasu_leaving(self):
         try:
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, Const.LEAVING_BUTTON_XPATH)))
@@ -93,9 +69,8 @@ class Api:
         except Exception as e:
             print("Ieyasu_Leaving_Error")
 
-        # finally:
-        #     driver.quit()
 
+    # ログイン自動化処理
     def ieyasu_login(self, user_info):
         try:
             # URL接続
