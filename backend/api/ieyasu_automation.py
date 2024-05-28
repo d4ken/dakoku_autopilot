@@ -13,6 +13,15 @@ class Api:
     def __init__(self):
         self.window = None
 
+
+    # 打刻状況を返却（出社、出勤中、退勤）
+    def check_dakoku(self):
+        print('test')
+        # TODO: 4ボタンがDisabledなら退勤完了
+        # TODO: class指定で押下可能なボタンを取得
+        # TODO: ボタンの状態に応じて状態を返却
+
+
     # 出勤状態判定
     def check_attendance(self, is_quit=False):
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, Const.ATTENDANCE_BUTTON_ID)))
